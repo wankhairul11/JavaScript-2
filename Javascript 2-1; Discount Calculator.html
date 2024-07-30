@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light blue background */
+            background-color: rgb(19, 185, 211); /* Light blue background */
+            background-color: #13b9d3; /* Light blue background */
+            font-family: Arial, sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            background-color: #23ecfa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
+        }
+        h1 {
+            color: #005f99;
+            font-family: 'Courier New', Courier, monospace  ;
+            
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            
+        }
+        label, select, input, button {
+            margin-bottom: 10px;
+            
+        }
+        button {
+            background-color: #005f99;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004080;
+        }
+        #results {
+            margin-top: 20px;
+            background-color: #b1ecf5;
+        }
+    </style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome Stranger</title>
+    </head>
+
+    <body>
+        <center>
+            <h1>Discount Calculator</h1>
+            <form id="discountForm">
+                <label for="userType">User Type:</label>
+                <select id="userType" name="userType">
+                    <option value="guest">Guest</option>
+                    <option value="member">Member</option>
+                    <option value="premium_member">Premium Member</option>
+                    <option value="employee">Employee</option>
+                </select>
+                <br><br>
+                <label for="purchaseAmount">Purchase Amount:</label>
+                <input type="number" id="purchaseAmount" name="purchaseAmount" step="0.01" required>
+                <br><br>
+                <button type="submit">Calculate Discount</button>
+            </form>
+            <div id="results"></div>
+
+            <script>
+                document.getElementById('discountForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    let userType = document.getElementById('userType').value;
+                    let purchaseAmount = parseFloat(document.getElementById('purchaseAmount').value);
+
+                    // Function to calculate the discount
+                    function calculateDiscount(userType, purchaseAmount) {
+                        let discountPercentage;
+
+                        // Determine the discount percentage using a switch statement
+                        switch (userType.toLowerCase()) {
+                            case 'guest':
+                                discountPercentage = 0;
+                                break;
+                            case 'member':
+                                discountPercentage = 5;
+                                break;
+                            case 'premium_member':
+                                discountPercentage = 10;
+                                break;
+                            case 'employee':
+                                discountPercentage = 20;
+                                break;
+                            default:
+                                discountPercentage = 0;
+                                console.log('Unknown user type. No discount applied.');
+                        }
+
+                        // Calculate the discount amount and final price
+                        let discountAmount = (purchaseAmount * discountPercentage) / 100;
+                        let finalPrice = purchaseAmount - discountAmount;
+
+                        // Display the results
+                        let resultsDiv = document.getElementById('results');
+                        resultsDiv.innerHTML = `
+
+                               <p>User Type: ${userType}</p>
+                    <p>Purchase Amount: $${purchaseAmount.toFixed(2)}</p>
+                    <p>Discount Percentage: ${discountPercentage}%</p>
+                    <p>Discount Amount: $${discountAmount.toFixed(2)}</p>
+                    <p>Final Price: $${finalPrice.toFixed(2)}</p>
+                    `;
+                    }
+
+                    // Call the function to calculate the discount
+                    calculateDiscount(userType, purchaseAmount);
+                });
+            </script>
+        </center>
+    </body>
+
+    </html>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
